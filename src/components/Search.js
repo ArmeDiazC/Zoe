@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AgentContext from "../helpers/AgentContext";
 import "./styles/Search.scss";
@@ -8,6 +8,12 @@ const Search = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (income !== "" && !error) {
+      setDisabled(false);
+    }
+  }, []);
 
   const handleChange = (event) => {
     const value = event.target.value;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Card from "../components/Card";
 import AgentContext from "../helpers/AgentContext";
 import Search from "../components/Search";
@@ -9,11 +9,6 @@ const Results = () => {
   const { filtered, income, setFiltered } = useContext(AgentContext);
   const [view, setView] = useState(3);
   const [filter, setFilter] = useState("id");
-  const [saved, setSaved] = useState([]);
-
-  useEffect(() => {
-    localStorage.setItem("agents", JSON.stringify(saved));
-  }, [saved]);
 
   const handleView = (operation) => {
     let indexView = operation === "more" ? view + 3 : view - 3;
@@ -60,18 +55,33 @@ const Results = () => {
         sorted = [...filtered];
     }
 
-    console.log("****DEFAUL", filtered);
     setFiltered(sorted);
   };
 
-  const handleCard = (removedAgent) => {
-    setSaved([...saved, removedAgent]);
+  const storageAgents = (agent) => {
+    let storage = JSON.parse(localStorage.getItem("agents")) ?? [];
+   
+    if (storage.length === 0) {
+      localStorage.setItem("agents", JSON.stringify(storage));
+    }
 
-    const newAgents = [...filtered].filter((agent) => {
+    if (!storage.some((element) => element.id === agent.id)) {
+      storage.push(agent);
+    }
+
+    localStorage.setItem("agents", JSON.stringify(storage));
+  };
+
+  const handleCard = (removedAgent) => {
+    storageAgents(removedAgent);
+
+    const updatedAgents = [...filtered].filter((agent) => {
       return agent.name !== removedAgent.name;
     });
-    setFiltered(newAgents);
-    setView(view - 1);
+    setFiltered(updatedAgents);
+
+    const updateView = view <= 3 ? 3 : view - 1;
+    setView(updateView);
   };
 
   return (
