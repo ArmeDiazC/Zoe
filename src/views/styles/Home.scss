@@ -1,0 +1,20 @@
+.home {
+    width: 100%;
+    text-align: center;
+    margin-top: 76.5px;
+    box-sizing: border-box;
+    padding: 0 32px;
+
+    &__header {
+        margin: 36.5px 0 16px;
+    }
+    &__text {
+        margin: 0 0 32px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .home {
+        padding: 0 20%;
+    }
+}

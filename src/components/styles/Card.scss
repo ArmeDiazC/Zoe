@@ -1,0 +1,74 @@
+.card {
+    box-sizing: border-box;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(29, 35, 58, 0.1);
+
+    &__image {
+        &-rounded {
+            object-fit: cover;
+            border-radius: 50%;
+            height: 78px;
+            width: 78px;
+        }
+    }
+    &__info {
+        margin-left: 1em;
+        text-align: left;
+    }
+
+    &__name {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin: 0 0 8px;
+    }
+    &__id {
+        font-size: 1em;
+        margin: 0 0 11px;
+    }
+    &__income {
+        margin: 0;
+        strong {
+            margin-left: 8px;
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .card {
+        width: 30%;
+        height: 308px;
+        flex-direction: column;
+        position: relative;
+        &__image {
+            margin-bottom: 32px;
+            &-rounded {
+                height: 112px;
+                width: 112px;
+            }
+        }
+        &__info {
+            margin-left: 0;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        &__income {
+            height: 67px;
+            background-color: #f5f5f5;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
